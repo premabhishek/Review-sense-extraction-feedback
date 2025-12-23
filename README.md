@@ -50,88 +50,20 @@ graph LR
 
 The architecture of **ReviewSense** follows a **layered and modular design**, ensuring clarity, scalability, and ease of maintenance. Each component has a well-defined responsibility in the end-to-end sentiment analysis pipeline.
 
-#### 1. User / Admin  
-The system supports two roles:
-- **User** – submits reviews, performs analysis, and participates in active learning.
-- **Admin** – monitors system usage, sentiment trends, retraining history, and manages users.
+- **User & Interface Layer**  
+   A unified Streamlit web interface for users and admins, enabling review input, dataset upload, analysis, and dashboards with role-based access.
 
-Both roles interact with the system through the same interface, with **role-based access control**.
+- **Authentication & Access Control**  
+   Manages secure login, session handling, and controlled access to user and admin features.
 
-#### 2. Streamlit Web Interface  
-The **Streamlit Web Interface** serves as the presentation layer.  
-It provides:
-- Review input forms
-- Dataset upload functionality
-- Interactive dashboards and charts
-- Active Learning correction UI
-- Admin panel views
+- **NLP Processing Layer**  
+   Core intelligence layer handling text preprocessing, aspect extraction (spaCy), sentiment analysis (VADER), and confidence scoring.
 
-This layer ensures an intuitive and interactive user experience.
+- **Data & Aggregation Layer**  
+   Aggregates aspect-level sentiment results and stores users, analyses, feedback, and logs using an SQLite database.
 
-#### 3. Authentication and Session Layer  
-This layer handles:
-- User and admin authentication
-- Secure password verification
-- Session management
-- Role separation (User vs Admin views)
-
-It ensures that only authorized users can access protected features.
-
-#### 4. NLP Processing Engine  
-The **NLP Processing Engine** is the core intelligence layer.  
-It orchestrates:
-- Text preprocessing
-- Aspect extraction
-- Sentiment scoring
-- Confidence calculation
-
-This layer coordinates the flow between aspect extraction and sentiment analysis.
-
-#### 5. Sentiment Analysis Model – VADER  
-VADER is used for **sentiment scoring** at the aspect level.  
-It provides:
-- Compound sentiment scores
-- Polarity classification (Positive / Negative / Neutral)
-- Confidence estimation using sentiment probabilities
-
-VADER is lightweight, explainable, and suitable for real-time analysis.
-
-#### 6. Aspect Extraction Engine – spaCy  
-spaCy is used for **aspect extraction and opinion pairing** through:
-- Dependency parsing
-- Part-of-speech tagging
-- Rule-based keyword matching
-
-This enables fine-grained **aspect–opinion pair identification**, which is central to ABSA.
-
-#### 7. Result Aggregation Layer  
-This layer:
-- Combines outputs from aspect extraction and sentiment analysis
-- Aggregates results across reviews and datasets
-- Prepares structured outputs for storage and visualization
-
-It bridges raw NLP results with analytics-ready data.
-
-#### 8. SQLite Database  
-The **SQLite Database** acts as the persistence layer.  
-It stores:
-- User and admin data
-- Analysis results
-- Dataset summaries
-- Active Learning samples
-- Correction feedback
-- Activity logs and retraining history
-
-SQLite provides a lightweight and reliable storage solution suitable for academic and prototype systems.
-
-#### 9. Visualization and Dashboard Layer  
-The final layer presents insights using:
-- Aspect-wise sentiment charts
-- Confidence distributions
-- Sentiment trends over time
-- Admin analytics dashboards
-
-This layer ensures **interpretability and transparency**, helping users and admins understand system behavior.
+- **Visualization & Analytics Layer**  
+   Interactive dashboards presenting aspect-wise sentiment, confidence distributions, trends, and admin analytics.
 
 ## 🔄 Application Workflow
 
